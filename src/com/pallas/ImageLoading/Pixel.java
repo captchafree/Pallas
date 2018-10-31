@@ -1,6 +1,7 @@
-package com.company.ImageLoading;
+package com.pallas.ImageLoading;
 
 public class Pixel {
+
     public int red, green, blue, alpha;
 
     public void grayScale() {

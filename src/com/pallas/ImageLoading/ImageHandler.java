@@ -1,4 +1,4 @@
-package com.company.ImageLoading;
+package com.pallas.ImageLoading;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -10,21 +10,38 @@ import java.io.UncheckedIOException;
 import java.net.URL;
 import java.util.Base64;
 
+/**
+ * A class for loading/creating images
+ */
 public class ImageHandler {
 
-    public static BufferedImage getImage(String url) throws IOException {
-        return ImageIO.read(new URL(url));
+    /**
+     * Returns the image located at the URL
+     * @param url The URL to retrieve the image from
+     * @return The image at the URL
+     * @throws IOException If the image cannot be read
+     */
+    public static BufferedImage getImage(String url) {
+        try {
+            return ImageIO.read(new URL(url));
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
-    public static boolean saveImage(Image image, String filename) {
+    public static boolean saveImageToFile(Image image, String filename) {
         if(image == null) {
             return false;
         }
 
+        String formatType = filename.substring(filename.indexOf(".") + 1);
+
         try {
             BufferedImage imageToSave = toBufferedImage(image);
             File file = new File(filename);
-            ImageIO.write(imageToSave, "png", file);
+            ImageIO.write(imageToSave, formatType, file);
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -92,12 +109,12 @@ public class ImageHandler {
             return (BufferedImage) img;
         }
 
-        BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        BufferedImage bufferedImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 
-        Graphics2D bGr = bimage.createGraphics();
+        Graphics2D bGr = bufferedImage.createGraphics();
         bGr.drawImage(img, 0, 0, null);
         bGr.dispose();
 
-        return bimage;
+        return bufferedImage;
     }
 }
