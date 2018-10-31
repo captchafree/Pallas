@@ -1,5 +1,7 @@
 package com.pallas.ImageLoading;
 
+import com.pallas.EditingAlgorithms.*;
+
 import java.awt.image.BufferedImage;
 
 /**
@@ -18,22 +20,32 @@ public class PImage {
     }
 
     public PImage rotateClockwise90() {
-        this.image = ImageEditor.rotateClockwise90(this.image);
+        EditAlgorithm algorithm = new RotateClockwise90();
+        this.image = algorithm.performEdit(this.image);
         return this;
     }
 
     public PImage rotateCounterClockwise90() {
-        this.image = ImageEditor.rotateCounterClockwise90(this.image);
+        EditAlgorithm algorithm = new RotateCounterClockwise90();
+        this.image = algorithm.performEdit(this.image);
         return this;
     }
 
     public PImage rotate180() {
-        this.image = ImageEditor.rotate180(this.image);
+        EditAlgorithm algorithm = new Rotate180();
+        this.image = algorithm.performEdit(this.image);
         return this;
     }
 
     public PImage grayscale() {
-        this.image = ImageEditor.toGrayScale(this.image);
+        EditAlgorithm algorithm = new Grayscale();
+        this.image = algorithm.performEdit(this.image);
+        return this;
+    }
+
+    public PImage gradient() {
+        EditAlgorithm algorithm = new Gradient();
+        this.image = algorithm.performEdit(this.image);
         return this;
     }
 
@@ -45,7 +57,7 @@ public class PImage {
         return this.image;
     }
 
-    public boolean saveImageToFile(String filename) {
+    public boolean saveToFile(String filename) {
         return ImageHandler.saveImageToFile(this.image, filename);
     }
 }

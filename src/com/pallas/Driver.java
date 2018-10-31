@@ -1,14 +1,18 @@
 package com.pallas;
 
+import com.pallas.EditingAlgorithms.EditAlgorithm;
+import com.pallas.EditingAlgorithms.SeamCarve;
 import com.pallas.ImageLoading.PImage;
 
 public class Driver {
 
     public static void main(String[] args) {
-        String url = "https://pbs.twimg.com/profile_images/1046968391389589507/_0r5bQLl_400x400.jpg";
-        PImage img = new PImage(url);
+        final String saban = "http://2f13yq12csmv2yraq925m73i-wpengine.netdna-ssl.com/wp-content/uploads/2011/03/sabanstatue1.jpg";
+        final String spiral = "https://www.researchgate.net/profile/Neil_Harrison/publication/5608780/figure/fig1/AS:214351891755010@1428116881418/High-contrast-flashing-checkerboard-task-used-as-a-potent-stimulus-of-primary-visual.png";
 
-        img.rotate180().grayscale().rotateClockwise90().rotateCounterClockwise90().rotateCounterClockwise90().rotateClockwise90().rotate180();
-        img.saveImageToFile("testImage.png");
+        PImage img = new PImage(spiral);
+
+        img.gradient().saveToFile("gradient.png");
+
     }
 }

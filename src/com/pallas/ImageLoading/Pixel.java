@@ -6,9 +6,7 @@ public class Pixel {
 
     public void grayScale() {
         int average = (red + blue + green) / 3;
-        this.red = average;
-        this.green = average;
-        this.blue = average;
+        this.red = this.green = this.blue = average;
     }
 
     @Override

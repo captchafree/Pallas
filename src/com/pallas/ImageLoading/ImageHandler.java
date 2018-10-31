@@ -50,10 +50,11 @@ public class ImageHandler {
     }
 
     public static Pixel[][] getImageMatrix(BufferedImage image) {
-        Pixel[][] matrix = new Pixel[image.getHeight()][image.getWidth()];
+        Pixel[][] matrix = new Pixel[image.getWidth()][image.getHeight()];
 
         for(int i = 0; i < matrix.length; i++) {
             for(int j = 0; j < matrix[i].length; j++) {
+
                 int value = image.getRGB(i, j);
                 int red = (value >> 16) & 0x000000FF;
                 int green = (value >> 8) & 0x000000FF;
@@ -83,6 +84,23 @@ public class ImageHandler {
                     int blue = p.blue;
 
                     Color newColor = new Color(red, green, blue);
+                    image.setRGB(i, j, newColor.getRGB());
+                }
+            }
+            return image;
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static BufferedImage createImageFromMatrix(int[][] matrix) {
+        try {
+            BufferedImage image = new BufferedImage(matrix.length, matrix[0].length, BufferedImage.TYPE_INT_RGB);
+            for(int i = 0; i < matrix.length; i++) {
+                for(int j = 0; j < matrix[i].length; j++) {
+                    int c = matrix[i][j];
+                    Color newColor = new Color(c, c, c);
                     image.setRGB(i, j, newColor.getRGB());
                 }
             }
