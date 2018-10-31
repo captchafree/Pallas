@@ -49,6 +49,12 @@ public class PImage {
         return this;
     }
 
+    public PImage energyMap() {
+        EditAlgorithm algorithm = new EnergyMap();
+        this.image = algorithm.performEdit(this.image);
+        return this;
+    }
+
     public String toBase64() {
         return ImageHandler.toBase64(this.image);
     }
