@@ -46,12 +46,12 @@ public class SeamCarve implements EditAlgorithm {
         end = Math.min(end, row.length-1);
 
         Pixel min = new Pixel();
-        min.red = 255;
+        min.setValue(255);
 
         int minIndex = row.length;
 
         for(int i = beg; i <= end; i++) {
-            if(row[i].red < min.red) {
+            if(row[i].getValue() < min.getValue()) {
                 min = row[i];
                 minIndex = i;
             }

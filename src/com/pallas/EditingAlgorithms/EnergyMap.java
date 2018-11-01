@@ -59,9 +59,9 @@ public class EnergyMap implements EditAlgorithm {
 
         for(int i = 0; i < pixelMatrix.length; i++) {
             for(int j = 0; j < pixelMatrix[i].length; j++) {
-                matrixRed[i][j] = pixelMatrix[i][j].red;
-                matrixGreen[i][j] = pixelMatrix[i][j].green;
-                matrixBlue[i][j] = pixelMatrix[i][j].blue;
+                matrixRed[i][j] = pixelMatrix[i][j].getRedComponent();
+                matrixGreen[i][j] = pixelMatrix[i][j].getGreenComponent();
+                matrixBlue[i][j] = pixelMatrix[i][j].getBlueComponent();
             }
         }
 
