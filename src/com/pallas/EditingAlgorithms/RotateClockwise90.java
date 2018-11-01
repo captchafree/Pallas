@@ -1,6 +1,7 @@
 package com.pallas.EditingAlgorithms;
 
 import com.pallas.ImageLoading.ImageHandler;
+import com.pallas.ImageLoading.PImage;
 import com.pallas.ImageLoading.Pixel;
 
 import java.awt.image.BufferedImage;
@@ -9,7 +10,7 @@ public class RotateClockwise90 implements EditAlgorithm {
 
     @Override
     public BufferedImage performEdit(BufferedImage image) {
-        Pixel[][] matrix = ImageHandler.getImageMatrix(image);
+        /*Pixel[][] matrix = ImageHandler.getImageMatrix(image);
         Pixel[][] newMatrix = new Pixel[matrix[0].length][matrix.length];
 
         for(int i = matrix.length - 1; i >= 0; i--) {
@@ -18,6 +19,10 @@ public class RotateClockwise90 implements EditAlgorithm {
             }
         }
 
-        return ImageHandler.createImageFromMatrix(newMatrix);
+        return ImageHandler.createImageFromMatrix(newMatrix);*/
+
+        PImage img = new PImage(image);
+        img.rotate180().rotateCounterClockwise90();
+        return img.getImage();
     }
 }

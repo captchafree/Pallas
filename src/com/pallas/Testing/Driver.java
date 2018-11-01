@@ -10,7 +10,7 @@ public class Driver {
         final String moraine = "https://polarsteps.s3.amazonaws.com/u_84958/60661467-16dc-46a4-9fdc-6b5f9b31f2ff_big-thumbnail84958_047540470239152066_1512552969480";
         final String rio = "https://www.cruisebe.com/sites/default/files/portofcallobject/commons/a/a1/1_cristor_redentor_2014.jpg";
 
-        PImage img = new PImage(saban);
+        PImage img = new PImage(moraine);
         img.seamCarve();
         img.saveToFile("seamCarve.png");
 

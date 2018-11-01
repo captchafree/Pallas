@@ -21,7 +21,7 @@ public class Rotate180 implements EditAlgorithm {
         return ImageHandler.createImageFromMatrix(newMatrix);*/
 
         PImage img = new PImage(image);
-        img.rotateClockwise90().rotateClockwise90();
+        img.rotateCounterClockwise90().rotateCounterClockwise90();
         return img.getImage();
     }
 }

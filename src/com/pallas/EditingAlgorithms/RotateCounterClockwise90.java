@@ -20,8 +20,12 @@ public class RotateCounterClockwise90 implements EditAlgorithm {
 
         return ImageHandler.createImageFromMatrix(newMatrix);*/
 
-        PImage img = new PImage(image);
-        img.rotate180().rotateClockwise90();
-        return img.getImage();
+        int w = image.getWidth();
+        int h = image .getHeight();
+        BufferedImage dest = new BufferedImage(h, w, image.getType());
+        for (int y = 0; y < h; y++)
+            for (int x = 0; x < w; x++)
+                dest.setRGB(y, w - x - 1, image.getRGB(x, y));
+        return dest;
     }
 }

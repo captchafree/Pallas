@@ -14,9 +14,9 @@ public class SeamCarve implements EditAlgorithm {
 
     @Override
     public BufferedImage performEdit(BufferedImage image) {
-        BufferedImage resultWithSeam = deepCopy(image);
+        BufferedImage resultWithSeam = deepCopy(new PImage(image).rotateClockwise90().getImage());
 
-        PImage cost = new PImage(image).accumulatedCostMatrix();
+        PImage cost = new PImage(image).rotateCounterClockwise90().accumulatedCostMatrix();
         Pixel[][] pixelMatrix = ImageHandler.getImageMatrix(cost.getImage());
 
         Point[] seam = new Point[pixelMatrix.length];
@@ -35,10 +35,10 @@ public class SeamCarve implements EditAlgorithm {
         }
 
         for(Point p : seam) {
-            resultWithSeam.setRGB(p.x, p.y, new Color(255, 0, 0).getRGB());
+            resultWithSeam.setRGB(p.y, p.x, new Color(255, 0, 0).getRGB());
         }
 
-        return resultWithSeam;
+        return new PImage(resultWithSeam).rotateCounterClockwise90().getImage();
     }
 
     private static int minimumValueRestrictedToRange(Pixel[] row, int beg, int end) {
