@@ -22,22 +22,20 @@ public class Filter implements EditAlgorithm {
             for(int j = 0; j < pixelMatrix[i].length; j++) {
                 Pixel p = new Pixel();
                 if(i == 0 || j == 0) {
-                    p.red = 255;
-                    p.green = 255;
-                    p.blue = 255;
+                    p.setRGB(255, 255, 255);
                 } else {
                     for(int k = 0; k < 3; k++) {
                         for(int l = 0; l < 3; l++) {
-                            p.red += Math.max(0, Math.min(255, filter[k][l] * pixelMatrix[i][j].red));
-                            p.green += Math.max(0, Math.min(255, filter[k][l] * pixelMatrix[i][j].green));
-                            p.blue += Math.max(0, Math.min(255, filter[k][l] * pixelMatrix[i][j].blue));
+                            p.setRedComponent(p.getRedComponent() + Math.max(0, Math.min(255, filter[k][l] * pixelMatrix[i][j].getRedComponent())));
+                            p.setGreenComponent(p.getGreenComponent() + Math.max(0, Math.min(255, filter[k][l] * pixelMatrix[i][j].getGreenComponent())));
+                            p.setBlueComponent(p.getBlueComponent() + Math.max(0, Math.min(255, filter[k][l] * pixelMatrix[i][j].getBlueComponent())));
                         }
                     }
                 }
 
-                p.red = Math.max(0, Math.min(255, p.red));
-                p.green = Math.max(0, Math.min(255, p.green));
-                p.blue = Math.max(0, Math.min(255, p.blue));
+                p.setRedComponent(Math.max(0, Math.min(255, p.getRedComponent())));
+                p.setGreenComponent(Math.max(0, Math.min(255, p.getGreenComponent())));
+                p.setBlueComponent(Math.max(0, Math.min(255, p.getBlueComponent())));
 
                 result[i][j] = p;
             }

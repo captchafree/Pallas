@@ -32,9 +32,10 @@ public class Gradient implements EditAlgorithm {
                 double angle = Math.atan(gradientY[i][j] / gradientX[i][j]);
 
                 Pixel pixel = new Pixel();
-                pixel.red = (int) Math.abs(matrix[i][j] * Math.sin(angle));
-                pixel.green = (int) Math.abs(matrix[i][j] * Math.cos(angle));
-                pixel.blue = 0;
+                pixel.setRedComponent((int) Math.abs(matrix[i][j] * Math.sin(angle)));
+                pixel.setGreenComponent((int) Math.abs(matrix[i][j] * Math.sin(angle)));
+                pixel.setBlueComponent(0);
+
                 pixels[i][j] = pixel;
             }
         }
@@ -53,7 +54,7 @@ public class Gradient implements EditAlgorithm {
 
         for(int i = 0; i < matrix.length; i++) {
             for(int j = 0; j < matrix[i].length; j++) {
-                matrix[i][j] = pixelMatrix[i][j].red;
+                matrix[i][j] = pixelMatrix[i][j].getValue();
             }
         }
 

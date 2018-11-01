@@ -18,11 +18,11 @@ public class AccumulatedCost implements EditAlgorithm {
 
         for(int i = 0 ; i < matrix.length; i++) {
             for(int j = 0; j < matrix[0].length; j++) {
-                matrix[i][j] = pixelMatrix[i][j].red;
+                matrix[i][j] = pixelMatrix[i][j].getRedComponent();
             }
         }
 
-        return ImageHandler.createImageFromMatrix(matrix);
+        return ImageHandler.createImageFromMatrix(calculateCostMatrix(matrix));
     }
 
     private int[][] calculateCostMatrix(int[][] matrix) {
@@ -33,9 +33,9 @@ public class AccumulatedCost implements EditAlgorithm {
                 if(i == 0) {
                     result[i][j] = matrix[i][j];
                 } else if(j == 0) {
-                    result[i][j] = matrix[i][j] + Math.min(matrix[i-1][j-1], matrix[i-1][j]);
-                } else if (j == matrix[0].length - 1) {
                     result[i][j] = matrix[i][j] + Math.min(matrix[i-1][j], matrix[i-1][j+1]);
+                } else if (j == matrix[0].length - 1) {
+                    result[i][j] = matrix[i][j] + Math.min(matrix[i-1][j-1], matrix[i-1][j]);
                 } else {
                     result[i][j] = matrix[i][j] + Math.min(Math.min(matrix[i-1][j-1], matrix[i-1][j]), matrix[i-1][j+1]);
                 }

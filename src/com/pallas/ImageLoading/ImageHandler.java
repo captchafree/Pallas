@@ -56,14 +56,7 @@ public class ImageHandler {
             for(int j = 0; j < matrix[i].length; j++) {
 
                 int value = image.getRGB(i, j);
-                int red = (value >> 16) & 0x000000FF;
-                int green = (value >> 8) & 0x000000FF;
-                int blue = (value) & 0x000000FF;
-
-                Pixel p = new Pixel();
-                p.red = red;
-                p.green = green;
-                p.blue = blue;
+                Pixel p = new Pixel(value);
 
                 matrix[i][j] = p;
             }
@@ -77,14 +70,7 @@ public class ImageHandler {
             BufferedImage image = new BufferedImage(matrix.length, matrix[0].length, BufferedImage.TYPE_INT_RGB);
             for(int i = 0; i < matrix.length; i++) {
                 for(int j = 0; j < matrix[i].length; j++) {
-
-                    Pixel p = matrix[i][j];
-                    int red = p.red;
-                    int green = p.green;
-                    int blue = p.blue;
-
-                    Color newColor = new Color(red, green, blue);
-                    image.setRGB(i, j, newColor.getRGB());
+                    image.setRGB(i, j, matrix[i][j].getValue());
                 }
             }
             return image;
@@ -95,6 +81,12 @@ public class ImageHandler {
     }
 
     public static BufferedImage createImageFromMatrix(int[][] matrix) {
+        for(int i = 0; i < matrix.length; i++) {
+            for(int j = 0; j < matrix[i].length; j++) {
+                matrix[i][j] = Math.max(Math.min(matrix[i][j], 255), 0);
+            }
+        }
+
         try {
             BufferedImage image = new BufferedImage(matrix.length, matrix[0].length, BufferedImage.TYPE_INT_RGB);
             for(int i = 0; i < matrix.length; i++) {
