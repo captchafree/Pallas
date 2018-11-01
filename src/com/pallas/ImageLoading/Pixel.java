@@ -9,6 +9,21 @@ public class Pixel {
         this.red = this.green = this.blue = average;
     }
 
+    public void maskRed() {
+        this.green = 0;
+        this.blue = 0;
+    }
+
+    public void maskGreen() {
+        this.red = 0;
+        this.blue = 0;
+    }
+
+    public void maskBlue() {
+        this.red = 0;
+        this.green = 0;
+    }
+
     @Override
     public String toString() {
         return "(" + red + ", " + green + ", " + blue + ")";

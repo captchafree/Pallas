@@ -43,6 +43,24 @@ public class PImage {
         return this;
     }
 
+    public PImage maskRed() {
+        EditAlgorithm algorithm = new RedMask();
+        this.image = algorithm.performEdit(this.image);
+        return this;
+    }
+
+    public PImage maskGreen() {
+        EditAlgorithm algorithm = new GreenMask();
+        this.image = algorithm.performEdit(this.image);
+        return this;
+    }
+
+    public PImage maskBlue() {
+        EditAlgorithm algorithm = new BlueMask();
+        this.image = algorithm.performEdit(this.image);
+        return this;
+    }
+
     public PImage gradient() {
         EditAlgorithm algorithm = new Gradient();
         this.image = algorithm.performEdit(this.image);
