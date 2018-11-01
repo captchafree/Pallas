@@ -73,6 +73,29 @@ public class PImage {
         return this;
     }
 
+    public PImage accumulatedCostMatrix() {
+        EditAlgorithm algorithm = new AccumulatedCost();
+        this.image = algorithm.performEdit(this.image);
+        return this;
+    }
+
+    public PImage seamCarve() {
+        EditAlgorithm algorithm = new SeamCarve();
+        this.image = algorithm.performEdit(this.image);
+        return this;
+    }
+
+    public PImage filter() {
+        EditAlgorithm algorithm = new Filter();
+        this.image = algorithm.performEdit(this.image);
+        return this;
+    }
+
+    public PImage performEdit(EditAlgorithm algorithm) {
+        this.image = algorithm.performEdit(this.image);
+        return this;
+    }
+
     public String toBase64() {
         return ImageHandler.toBase64(this.image);
     }

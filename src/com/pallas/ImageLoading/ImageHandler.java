@@ -31,7 +31,7 @@ public class ImageHandler {
         return null;
     }
 
-    public static boolean saveImageToFile(Image image, String filename) {
+    public static boolean saveImageToFile(BufferedImage image, String filename) {
         if(image == null) {
             return false;
         }
@@ -39,7 +39,7 @@ public class ImageHandler {
         String formatType = filename.substring(filename.indexOf(".") + 1);
 
         try {
-            BufferedImage imageToSave = toBufferedImage(image);
+            BufferedImage imageToSave = image;
             File file = new File(filename);
             ImageIO.write(imageToSave, formatType, file);
             return true;
@@ -120,19 +120,5 @@ public class ImageHandler {
         } catch (final IOException ioe) {
             throw new UncheckedIOException(ioe);
         }
-    }
-
-    private static BufferedImage toBufferedImage(Image img) {
-        if (img instanceof BufferedImage) {
-            return (BufferedImage) img;
-        }
-
-        BufferedImage bufferedImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-
-        Graphics2D bGr = bufferedImage.createGraphics();
-        bGr.drawImage(img, 0, 0, null);
-        bGr.dispose();
-
-        return bufferedImage;
     }
 }

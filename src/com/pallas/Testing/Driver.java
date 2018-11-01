@@ -1,4 +1,4 @@
-package com.pallas;
+package com.pallas.Testing;
 
 import com.pallas.ImageLoading.PImage;
 
@@ -10,25 +10,25 @@ public class Driver {
         final String moraine = "https://polarsteps.s3.amazonaws.com/u_84958/60661467-16dc-46a4-9fdc-6b5f9b31f2ff_big-thumbnail84958_047540470239152066_1512552969480";
         final String rio = "https://www.cruisebe.com/sites/default/files/portofcallobject/commons/a/a1/1_cristor_redentor_2014.jpg";
 
-        PImage img = new PImage(rio);
-        img.saveToFile("original.png");
-        img.gradient();
-        img.saveToFile("gradient.png");
+        PImage img = new PImage(saban);
+        img.seamCarve();
+        img.saveToFile("seamCarve.png");
 
-        img = new PImage(rio);
+        /*img = new PImage(moraine);
         img.energyMap();
         img.saveToFile("energyMap.png");
 
-        img = new PImage(rio);
+        img = new PImage(spiral);
         img.maskRed();
         img.saveToFile("redMask.png");
 
-        img = new PImage(rio);
+        img = new PImage(spiral);
         img.maskGreen();
         img.saveToFile("greenMask.png");
 
-        img = new PImage(rio);
+        img = new PImage(spiral);
         img.maskBlue();
-        img.saveToFile("blueMask.png");
+        img.saveToFile("blueMask.png");*/
+
     }
 }
