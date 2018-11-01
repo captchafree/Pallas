@@ -12,7 +12,6 @@ public class EnergyMap implements EditAlgorithm {
 
     @Override
     public BufferedImage performEdit(BufferedImage image) {
-        System.out.println("Getting image matrix");
         Map<String, int[][]> matrix = getImageMatrix(image);
 
         int[][] matrixRed = matrix.get("red");
@@ -44,7 +43,6 @@ public class EnergyMap implements EditAlgorithm {
             }
         }
 
-        System.out.println("Creating Image");
         return ImageHandler.createImageFromMatrix(energyMap);
     }
 

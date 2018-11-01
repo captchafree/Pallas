@@ -26,19 +26,30 @@ public class AccumulatedCost implements EditAlgorithm {
     }
 
     private int[][] calculateCostMatrix(int[][] matrix) {
-        int[][] result = new int[matrix.length][matrix[0].length];
+        int[][] result = matrix;
 
+        int max = 0;
         for(int i = 0 ; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 if(i == 0) {
                     result[i][j] = matrix[i][j];
                 } else if(j == 0) {
-                    result[i][j] = matrix[i][j] + Math.min(matrix[i-1][j], matrix[i-1][j+1]);
+                    result[i][j] = result[i][j] + Math.min(result[i-1][j], result[i-1][j+1]);
                 } else if (j == matrix[0].length - 1) {
-                    result[i][j] = matrix[i][j] + Math.min(matrix[i-1][j-1], matrix[i-1][j]);
+                    result[i][j] = result[i][j] + Math.min(result[i-1][j-1], result[i-1][j]);
                 } else {
-                    result[i][j] = matrix[i][j] + Math.min(Math.min(matrix[i-1][j-1], matrix[i-1][j]), matrix[i-1][j+1]);
+                    result[i][j] = result[i][j] + Math.min(Math.min(result[i-1][j-1], result[i-1][j]), result[i-1][j+1]);
                 }
+
+                if(result[i][j] > max) {
+                    max = result[i][j];
+                }
+            }
+        }
+
+        for(int i = 0 ; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                result[i][j] = (int) ((((double) result[i][j]) / (double) max) * 255);
             }
         }
 

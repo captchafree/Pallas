@@ -2,7 +2,10 @@ package com.pallas.ImageLoading;
 
 import com.pallas.EditingAlgorithms.*;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Wraps the BufferedImage class with ImageHandler and ImageEditor functionality.
@@ -16,7 +19,19 @@ public class PImage {
     }
 
     public PImage(BufferedImage image) {
-        this.image = image;
+        this.image = ImageHandler.deepCopy(image);
+    }
+
+    public PImage(File file) {
+        try {
+            this.image = ImageIO.read(file);
+        } catch(IOException e) {
+            this.image = null;
+        }
+    }
+
+    public PImage(PImage image) {
+        this(image.getImage());
     }
 
     public PImage rotateClockwise90() {
