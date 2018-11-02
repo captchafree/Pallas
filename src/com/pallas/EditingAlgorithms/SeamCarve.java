@@ -10,14 +10,20 @@ import java.awt.image.BufferedImage;
 
 public class SeamCarve implements EditAlgorithm {
 
-    private static int index = 1;
-
     @Override
     public BufferedImage performEdit(BufferedImage image) {
         BufferedImage resultWithSeam = ImageHandler.deepCopy(new PImage(image).rotateClockwise90().getImage());
 
-        PImage cost = new PImage(image).rotateCounterClockwise90().accumulatedCostMatrix(); cost.saveToFile("cost_" + index + ".png");
-        Pixel[][] pixelMatrix = ImageHandler.getImageMatrix(cost.getImage());
+        PImage cost = new PImage(image).rotateCounterClockwise90().energyMap();
+        int[][] pixelMatrix = AccumulatedCost.calculateCostMatrix(ImageHandler.getImageMatrix(cost.getImage()));
+
+        for(int[] i : pixelMatrix) {
+            for(int j : i) {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
 
         Point[] seam = new Point[pixelMatrix.length];
 
@@ -38,23 +44,21 @@ public class SeamCarve implements EditAlgorithm {
 
         Pixel[][] resultMatrix = ImageHandler.getImageMatrix(resultWithSeam);
 
-        new PImage(ImageHandler.createImageFromMatrix(resultMatrix)).saveToFile("seamCarveMarking_" + index + ".png");
-        index++;
+        new PImage(ImageHandler.createImageFromMatrix(resultMatrix)).saveToFile("test2_seam.png");
 
         return new PImage(ImageHandler.createImageFromMatrix(removeSeam(resultMatrix, seam))).rotateCounterClockwise90().getImage();
     }
 
-    private static int minimumValueRestrictedToRange(Pixel[] row, int beg, int end) {
+    private static int minimumValueRestrictedToRange(int[] row, int beg, int end) {
         beg = Math.max(beg, 0);
         end = Math.min(end, row.length-1);
 
-        Pixel min = new Pixel();
-        min.setValue(Integer.MAX_VALUE);
+        int min = Integer.MAX_VALUE;
 
         int minIndex = 0;
 
         for(int i = beg; i <= end; i++) {
-            if(row[i].getValue() < min.getValue()) {
+            if(row[i] < min) {
                 min = row[i];
                 minIndex = i;
             }

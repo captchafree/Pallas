@@ -1,5 +1,6 @@
 package com.pallas.Testing;
 
+import com.pallas.ImageLoading.GifGenerator;
 import com.pallas.ImageLoading.PImage;
 
 import java.io.File;
@@ -12,31 +13,29 @@ public class Driver {
         final String moraine = "https://polarsteps.s3.amazonaws.com/u_84958/60661467-16dc-46a4-9fdc-6b5f9b31f2ff_big-thumbnail84958_047540470239152066_1512552969480";
         final String rio = "https://www.cruisebe.com/sites/default/files/portofcallobject/commons/a/a1/1_cristor_redentor_2014.jpg";
         final String person = "https://cdn.iphonephotographyschool.com/wp-content/uploads/iPhone-Photos-People-In-Landscapes-27@2x.jpg";
+        final String castle = "https://upload.wikimedia.org/wikipedia/commons/c/cb/Broadway_tower_edit.jpg";
 
-        PImage img = new PImage(moraine);
+        //PImage img = new PImage(new File("test1.png"));
+        PImage img = new PImage(castle);
+        img.gradient().saveToFile("castle_gradient.png");
 
+        //img.seamCarve().saveToFile("test2.png");
 
-        for(int i = 0; i < 300; i++) {
+        /*GifGenerator generator = new GifGenerator("Live_Carve_Castle.gif", img.getImage().getType(), 50, true);
+        generator.addImage(img.getImage());
+
+        for(int i = 0; i < 2; i++) {
             img.seamCarve();
             img = new PImage(img.getImage());
             System.out.println("Carved " + i + " times");
+
+            generator.addImage(img.getImage());
         }
 
-        /*img = new PImage(moraine);
-        img.energyMap();
-        img.saveToFile("energyMap.png");
+        generator.save();
 
-        img = new PImage(spiral);
-        img.maskRed();
-        img.saveToFile("redMask.png");
+        img.saveToFile("castle_carved.png");*/
 
-        img = new PImage(spiral);
-        img.maskGreen();
-        img.saveToFile("greenMask.png");
-
-        img = new PImage(spiral);
-        img.maskBlue();
-        img.saveToFile("blueMask.png");*/
 
     }
 }

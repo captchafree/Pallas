@@ -13,7 +13,7 @@ public class Grayscale implements EditAlgorithm {
 
         for(Pixel[] row : matrix) {
             for(Pixel pixel : row) {
-                pixel.grayScale();
+                pixel.grayscale();
             }
         }
 
