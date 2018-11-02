@@ -3,6 +3,8 @@ package com.pallas.ImageLoading;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -100,6 +102,7 @@ public class ImageHandler {
         } catch(Exception e) {
             e.printStackTrace();
         }
+
         return null;
     }
 
@@ -112,5 +115,12 @@ public class ImageHandler {
         } catch (final IOException ioe) {
             throw new UncheckedIOException(ioe);
         }
+    }
+
+    public static BufferedImage deepCopy(BufferedImage bi) {
+        ColorModel cm = bi.getColorModel();
+        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+        WritableRaster raster = bi.copyData(null);
+        return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
     }
 }

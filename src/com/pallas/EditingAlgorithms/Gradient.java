@@ -15,7 +15,6 @@ public class Gradient implements EditAlgorithm {
         int[][] gradientX = getGradientMatrixX(matrix);
         int[][] gradientY = getGradientMatrixY(matrix);
 
-
         for(int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 matrix[i][j] = (int) Math.sqrt(Math.pow(gradientX[i][j], 2) + Math.pow(gradientY[i][j], 2));
@@ -33,13 +32,12 @@ public class Gradient implements EditAlgorithm {
 
                 Pixel pixel = new Pixel();
                 pixel.setRedComponent((int) Math.abs(matrix[i][j] * Math.sin(angle)));
-                pixel.setGreenComponent((int) Math.abs(matrix[i][j] * Math.sin(angle)));
+                pixel.setGreenComponent((int) Math.abs(matrix[i][j] * Math.cos(angle)));
                 pixel.setBlueComponent(0);
 
                 pixels[i][j] = pixel;
             }
         }
-
 
         return ImageHandler.createImageFromMatrix(pixels);
     }
@@ -54,7 +52,7 @@ public class Gradient implements EditAlgorithm {
 
         for(int i = 0; i < matrix.length; i++) {
             for(int j = 0; j < matrix[i].length; j++) {
-                matrix[i][j] = pixelMatrix[i][j].getValue();
+                matrix[i][j] = pixelMatrix[i][j].getRedComponent();
             }
         }
 
@@ -78,7 +76,7 @@ public class Gradient implements EditAlgorithm {
 
         for(int i = 0; i < pixels.length; i++) {
             for(int j = 1; j < pixels[i].length-1; j++) {
-                result[i][j] = (pixels[i][j+1] - pixels[i][j-1]) / 2;
+                result[i][j] = Math.abs(pixels[i][j+1] - pixels[i][j-1]) / 2;
             }
         }
 

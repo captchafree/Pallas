@@ -16,7 +16,7 @@ public class Pixel {
         this.value = 0;
     }
 
-    public void grayScale() {
+    public void grayscale() {
         int red, green, blue;
         red = this.getRedComponent();
         green = this.getGreenComponent();
@@ -39,7 +39,7 @@ public class Pixel {
     }
 
     public void setRedComponent(int value) {
-        setRGB(getRedComponent(), getGreenComponent(), value);
+        setRGB(value, getGreenComponent(), getBlueComponent());
     }
 
     public void setGreenComponent(int value) {
@@ -47,7 +47,7 @@ public class Pixel {
     }
 
     public void setBlueComponent(int value) {
-        setRGB(value, getGreenComponent(), getBlueComponent());
+        setRGB(getRedComponent(), getGreenComponent(), value);
     }
 
     public int getRedComponent() {
