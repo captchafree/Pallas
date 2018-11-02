@@ -39,7 +39,6 @@ public class Gradient implements EditAlgorithm {
             }
         }
 
-
         return ImageHandler.createImageFromMatrix(pixels);
     }
 

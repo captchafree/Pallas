@@ -15,16 +15,16 @@ public class Driver {
         final String person = "https://cdn.iphonephotographyschool.com/wp-content/uploads/iPhone-Photos-People-In-Landscapes-27@2x.jpg";
         final String castle = "https://upload.wikimedia.org/wikipedia/commons/c/cb/Broadway_tower_edit.jpg";
 
-        //PImage img = new PImage(new File("test1.png"));
-        PImage img = new PImage(castle);
-        img.gradient().saveToFile("castle_gradient.png");
+        PImage img = new PImage(new File("castle_carved.png"));
+        //PImage img = new PImage(new File("test.png"));
+        //img.seamCarve().saveToFile("test1.png");
 
         //img.seamCarve().saveToFile("test2.png");
 
-        /*GifGenerator generator = new GifGenerator("Live_Carve_Castle.gif", img.getImage().getType(), 50, true);
+        GifGenerator generator = new GifGenerator("Live_Carve_Castle.gif", img.getImage().getType(), 50, true);
         generator.addImage(img.getImage());
 
-        for(int i = 0; i < 2; i++) {
+        for(int i = 0; i < 600; i++) {
             img.seamCarve();
             img = new PImage(img.getImage());
             System.out.println("Carved " + i + " times");
@@ -34,7 +34,7 @@ public class Driver {
 
         generator.save();
 
-        img.saveToFile("castle_carved.png");*/
+        img.saveToFile("castle_carved.png");
 
 
     }
