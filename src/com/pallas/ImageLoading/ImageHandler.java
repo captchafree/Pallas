@@ -33,6 +33,12 @@ public class ImageHandler {
         return null;
     }
 
+    /**
+     * Saves an image to a specified file
+     * @param image The image to save
+     * @param filename The name of the file to save the image to
+     * @return True if the image was saved successfully, false otherwise.
+     */
     public static boolean saveImageToFile(BufferedImage image, String filename) {
         if(image == null) {
             return false;
@@ -51,6 +57,11 @@ public class ImageHandler {
         }
     }
 
+    /**
+     * Returns a 2D array of {@link Pixel} objects representing the image.
+     * @param image The image to get the pixel matrix of.
+     * @return A 2D array of {@link Pixel} objects representing the image.
+     */
     public static Pixel[][] getImageMatrix(BufferedImage image) {
         Pixel[][] matrix = new Pixel[image.getWidth()][image.getHeight()];
 
@@ -67,6 +78,11 @@ public class ImageHandler {
         return matrix;
     }
 
+    /**
+     * Creates an image from a 2D array of pixel objects.
+     * @param matrix The matrix to generate the image from.
+     * @return The generated image.
+     */
     public static BufferedImage createImageFromMatrix(Pixel[][] matrix) {
         try {
             BufferedImage image = new BufferedImage(matrix.length, matrix[0].length, BufferedImage.TYPE_INT_RGB);
@@ -82,6 +98,11 @@ public class ImageHandler {
         return null;
     }
 
+    /**
+     * Creates an image from a 2D array of integer values. This method always generates a grayscaled image.
+     * @param matrix The matrix to generate the image from.
+     * @return The generated image.
+     */
     public static BufferedImage createImageFromMatrix(int[][] matrix) {
         for(int i = 0; i < matrix.length; i++) {
             for(int j = 0; j < matrix[i].length; j++) {
@@ -106,10 +127,21 @@ public class ImageHandler {
         return null;
     }
 
+    /**
+     * Converts an image to Base64 with the default file type of .png
+     * @param image The image to convert.
+     * @return The Base64 String representation of the image.
+     */
     public static String toBase64(BufferedImage image) {
         return toBase64(image, "png");
     }
 
+    /**
+     * Converts an image to Base64.
+     * @param image The image to convert.
+     * @param fileExtension The image's file extension (e.g. png, jpg, gif, etc).
+     * @return The Base64 String representation of the image.
+     */
     public static String toBase64(BufferedImage image, String fileExtension) {
         final ByteArrayOutputStream os = new ByteArrayOutputStream();
 
@@ -121,10 +153,14 @@ public class ImageHandler {
         }
     }
 
-    public static BufferedImage deepCopy(BufferedImage bi) {
-        ColorModel cm = bi.getColorModel();
-        boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
-        WritableRaster raster = bi.copyData(null);
-        return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
+    /**
+     * Returns a deep copy of a BufferedImage object.
+     * @param image The image to create a copy of.
+     * @return The copy of the image.
+     */
+    public static BufferedImage deepCopy(BufferedImage image) {
+        ColorModel model = image.getColorModel();
+        WritableRaster raster = image.copyData(null);
+        return new BufferedImage(model, raster, model.isAlphaPremultiplied(), null);
     }
 }
