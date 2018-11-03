@@ -146,8 +146,8 @@ public class PImage {
      * Apply the seam carve algorithm to the image. This algorithm makes images width decrease by one.
      * @return itself
      */
-    public PImage seamCarve() {
-        EditAlgorithm algorithm = new SeamCarve();
+    public PImage seamCarveHorizontal() {
+        EditAlgorithm algorithm = new SeamCarveHorizontal();
         this.image = algorithm.performEdit(this.image);
         return this;
     }
@@ -166,7 +166,7 @@ public class PImage {
      * Perform a specified edit algorithm to the image
      * @return itself
      */
-    public PImage performEdit(EditAlgorithm algorithm) {
+    public PImage applyAlgorithm(EditAlgorithm algorithm) {
         this.image = algorithm.performEdit(this.image);
         return this;
     }

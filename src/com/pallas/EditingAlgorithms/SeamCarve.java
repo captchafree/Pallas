@@ -8,28 +8,14 @@ import com.pallas.ImageLoading.Point;
 
 import java.awt.image.BufferedImage;
 
-public class SeamCarve implements EditAlgorithm {
-
-    @Override
-    public BufferedImage performEdit(BufferedImage image) {
-        BufferedImage resultWithSeam = new PImage(image).getImage();
-
-        //Calculate the seam of the image
-        Point[] seam = getSeam(resultWithSeam);
-
-        //Store the image in an array
-        Pixel[][] resultMatrix = ImageHandler.getImageMatrix(resultWithSeam);
-
-        //Return the image that resulted from removing the seam
-        return new PImage(ImageHandler.createImageFromMatrix(removeSeam(resultMatrix, seam))).getImage();
-    }
+public abstract class SeamCarve {
 
     /**
      * Returns the list of points in the least interesting seam of an image
      * @param image The image to get the seam of
      * @return The list of points that are in the least interesting seam of the image
      */
-    private Point[] getSeam(final BufferedImage image) {
+    protected Point[] getSeam(final BufferedImage image) {
 
         //Get the accumulated cost matrix of the image
         PImage energyMap = new PImage(image).energyMap();
@@ -58,7 +44,6 @@ public class SeamCarve implements EditAlgorithm {
         return seam;
     }
 
-
     /**
      * Finds the index of the minimum pixel of the three adjacent pixels above it
      * @param matrix The image to look at
@@ -67,7 +52,7 @@ public class SeamCarve implements EditAlgorithm {
      * @param end The end index to check (inclusive)
      * @return
      */
-    private static int minimumValueRestrictedToRange(int[][] matrix, int y, int beg, int end) {
+    protected int minimumValueRestrictedToRange(int[][] matrix, int y, int beg, int end) {
         //Clips the indices so that they are in a valid range
         beg = Math.max(beg, 0);
         end = Math.min(end, matrix.length - 1);
@@ -92,7 +77,7 @@ public class SeamCarve implements EditAlgorithm {
      * @param seam An array of the points that should be removed
      * @return An array of pixels representing an image with the seam removed
      */
-    private static Pixel[][] removeSeam(Pixel[][] image, Point[] seam) {
+    protected Pixel[][] removeSeam(Pixel[][] image, Point[] seam) {
         Pixel[][] result = new Pixel[image.length - 1][image[0].length];
 
         int offset = 0;

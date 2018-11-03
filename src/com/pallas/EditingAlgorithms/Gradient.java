@@ -34,7 +34,7 @@ public class Gradient implements EditAlgorithm {
                 if(gradientX[x][y] == 0) {
                     gradientX[x][y] = 1;
                 }
-
+                
                 double angle = Math.atan(gradientY[x][y] / gradientX[x][y]);
 
                 //Set the color components of the pixel according to the angle of its gradient
