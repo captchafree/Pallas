@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 /**
  * Wraps the BufferedImage class with ImageHandler and ImageEditor functionality.
@@ -14,7 +15,7 @@ public class PImage {
 
     private BufferedImage image;
 
-    public PImage(String url) {
+    public PImage(URL url) {
         this.image = ImageHandler.getImage(url);
     }
 
@@ -84,12 +85,6 @@ public class PImage {
 
     public PImage energyMap() {
         EditAlgorithm algorithm = new EnergyMap();
-        this.image = algorithm.performEdit(this.image);
-        return this;
-    }
-
-    public PImage accumulatedCostMatrix() {
-        EditAlgorithm algorithm = new AccumulatedCost();
         this.image = algorithm.performEdit(this.image);
         return this;
     }

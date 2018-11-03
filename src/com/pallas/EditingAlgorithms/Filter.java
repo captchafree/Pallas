@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 public class Filter implements EditAlgorithm {
 
-    int[][] filter = new int[][] {
+    private static int[][] filter = new int[][] {
         {-2, -1, 0},
         {-1, 1, 1},
         {0, 1, 2},
@@ -18,26 +18,29 @@ public class Filter implements EditAlgorithm {
         Pixel[][] pixelMatrix = ImageHandler.getImageMatrix(image);
         Pixel[][] result = new Pixel[pixelMatrix.length][pixelMatrix[0].length];
 
-        for(int i = 0; i < pixelMatrix.length; i++) {
-            for(int j = 0; j < pixelMatrix[i].length; j++) {
+        //Apply the filter to the pixel matrix
+        for(int x = 0; x < pixelMatrix.length; x++) {
+            for(int y = 0; y < pixelMatrix[x].length; y++) {
                 Pixel p = new Pixel();
-                if(i == 0 || j == 0) {
+                if(x == 0 || y == 0) {
                     p.setRGB(255, 255, 255);
                 } else {
+                    //Calculate the value of the current pixel with the filter applied to it.
                     for(int k = 0; k < 3; k++) {
                         for(int l = 0; l < 3; l++) {
-                            p.setRedComponent(p.getRedComponent() + Math.max(0, Math.min(255, filter[k][l] * pixelMatrix[i][j].getRedComponent())));
-                            p.setGreenComponent(p.getGreenComponent() + Math.max(0, Math.min(255, filter[k][l] * pixelMatrix[i][j].getGreenComponent())));
-                            p.setBlueComponent(p.getBlueComponent() + Math.max(0, Math.min(255, filter[k][l] * pixelMatrix[i][j].getBlueComponent())));
+                            p.setRedComponent(p.getRedComponent() + Math.max(0, Math.min(255, filter[k][l] * pixelMatrix[x][y].getRedComponent())));
+                            p.setGreenComponent(p.getGreenComponent() + Math.max(0, Math.min(255, filter[k][l] * pixelMatrix[x][y].getGreenComponent())));
+                            p.setBlueComponent(p.getBlueComponent() + Math.max(0, Math.min(255, filter[k][l] * pixelMatrix[x][y].getBlueComponent())));
                         }
                     }
                 }
 
+                //Clip components to a value in [0, 255]
                 p.setRedComponent(Math.max(0, Math.min(255, p.getRedComponent())));
                 p.setGreenComponent(Math.max(0, Math.min(255, p.getGreenComponent())));
                 p.setBlueComponent(Math.max(0, Math.min(255, p.getBlueComponent())));
 
-                result[i][j] = p;
+                result[x][y] = p;
             }
         }
 

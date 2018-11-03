@@ -19,6 +19,10 @@ public class GifGenerator {
         }
     }
 
+    public void addImage(PImage image) {
+        this.addImage(image.getImage());
+    }
+
     public void addImage(BufferedImage image) {
         try {
             writer.writeToSequence(image);
