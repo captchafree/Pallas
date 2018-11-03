@@ -23,9 +23,9 @@ public class ImageHandler {
      * @return The image at the URL
      * @throws IOException If the image cannot be read
      */
-    public static BufferedImage getImage(String url) {
+    public static BufferedImage getImage(URL url) {
         try {
-            return ImageIO.read(new URL(url));
+            return ImageIO.read(url);
         } catch(IOException e) {
             e.printStackTrace();
         }

@@ -74,6 +74,10 @@ public class Pixel {
         return value;
     }
 
+    public int getAverageValueRGB() {
+        return (getRedComponent() + getGreenComponent() + getBlueComponent()) / 3;
+    }
+
     @Override
     public String toString() {
         return "(" + getRedComponent() + ", " + getGreenComponent() + ", " + getBlueComponent() + ")";
