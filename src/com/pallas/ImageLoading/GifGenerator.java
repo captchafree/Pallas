@@ -67,6 +67,7 @@ public class GifGenerator {
         for(int i = 0; i < iterations; i++) {
             image.applyAlgorithm(algorithmToApply);
             this.addImage(image);
+            System.out.println("Completed " + i + " iterations.");
         }
 
         this.save();
