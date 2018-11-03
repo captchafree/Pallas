@@ -166,7 +166,7 @@ public class PImage {
      * Perform a specified edit algorithm to the image
      * @return itself
      */
-    public PImage performEdit(EditAlgorithm algorithm) {
+    public PImage applyAlgorithm(EditAlgorithm algorithm) {
         this.image = algorithm.performEdit(this.image);
         return this;
     }

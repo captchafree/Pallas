@@ -107,10 +107,14 @@ public class ImageHandler {
     }
 
     public static String toBase64(BufferedImage image) {
+        return toBase64(image, "png");
+    }
+
+    public static String toBase64(BufferedImage image, String fileExtension) {
         final ByteArrayOutputStream os = new ByteArrayOutputStream();
 
         try {
-            ImageIO.write(image, "png", os);
+            ImageIO.write(image, fileExtension, os);
             return Base64.getEncoder().encodeToString(os.toByteArray());
         } catch (final IOException ioe) {
             throw new UncheckedIOException(ioe);

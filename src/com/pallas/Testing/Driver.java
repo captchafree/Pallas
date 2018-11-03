@@ -1,5 +1,6 @@
 package com.pallas.Testing;
 
+import com.pallas.EditingAlgorithms.SeamCarve;
 import com.pallas.ImageLoading.GifGenerator;
 import com.pallas.ImageLoading.PImage;
 
@@ -18,17 +19,7 @@ public class Driver {
         PImage img = new PImage(new URL(moraine));
 
         GifGenerator generator = new GifGenerator("Live_Carve_Person.gif", img.getImage().getType(), 50, true);
-        generator.addImage(img.getImage());
-
-        for(int i = 0; i < 1; i++) {
-            img.gradient();
-            img = new PImage(img.getImage());
-            System.out.println("Carved " + i + " times");
-
-            generator.addImage(img.getImage());
-        }
-
-        generator.save();
+        generator.createGif(img, new SeamCarve(), 20);
 
         img.saveToFile("person_carved.png");
 
