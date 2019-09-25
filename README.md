@@ -1,2 +1,2 @@
 # Pallas
-A framework for working with images in Java.
+A library for working with images in Java.
